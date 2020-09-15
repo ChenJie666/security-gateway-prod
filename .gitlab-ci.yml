@@ -1,0 +1,35 @@
+stages:
+  - build
+  - deploy
+
+job-build:
+  stage: build
+  only:
+    - dev
+    - test
+    - tags
+  script:
+    - sudo docker run --rm
+      -v ~/maven/settings.xml:/usr/share/maven/ref/settings.xml
+      -v ~/maven/repo:/root/.m2
+      -v ${PWD}:/appcode
+      -w /appcode
+      maven:3.6.3-jdk-8
+      mvn -U clean package -DskipTests
+    - jar_file=$(readlink -f $(find ./target/*.jar))
+    - cp -f ${jar_file} ~/${CI_PROJECT_NAME}.jar
+  after_script:
+    - sudo rm -rf ./target
+
+
+job-deploy-prod:
+  stage: deploy
+  only:
+    - tags
+  except:
+    - branches
+  script:
+    - cd ~
+    - scp -P 30307 ./${CI_PROJECT_NAME}.jar fayfox@deploy.mars.fayfox.com:/data/projects/java/
+    - ssh -p 30307 fayfox@deploy.mars.fayfox.com "cd spring_cloud_deploy;
+      ./deploy.sh ${CI_PROJECT_NAME} ${CI_COMMIT_REF_SLUG} web08.mars,web09.mars"

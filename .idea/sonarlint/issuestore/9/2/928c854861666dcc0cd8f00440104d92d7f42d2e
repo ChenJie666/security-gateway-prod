@@ -1,0 +1,13 @@
+
+d
+java:S1192/"IDefine a constant instead of duplicating this literal "username" 3 times.(¸«‘×ÿÿÿÿÿ
+d
+java:S1192)"IDefine a constant instead of duplicating this literal "password" 6 times.(æË”Àÿÿÿÿÿ
+i
+java:S1192+"NDefine a constant instead of duplicating this literal "client_secret" 4 times.(‘÷¸âûÿÿÿÿ
+F
+java:S1066›"/Merge this if statement with the enclosing one.(Ôí©è
+l	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óâäùüÿÿÿÿ
+g	java:S117™"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÑñÍ
+i	java:S100ˆ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óâäùüÿÿÿÿ
+V	java:S125-"<This block of commented-out lines of code should be removed.(® °ùÿÿÿÿ

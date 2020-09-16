@@ -48,7 +48,6 @@ eureka:
     service-url:
       defaultZone: http://hxr:hxr123@192.168.33.236:8761/eureka/
   instance:
-    instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true
 
 #设置feign客户端负载均衡和超时时间(OpenFeign默认支持ribbon)

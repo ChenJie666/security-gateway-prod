@@ -17,20 +17,20 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: MENU-CENTER
-          uri: lb://MENU-CENTER
+        - id: SMARTCOOK
+          uri: lb://SMARTCOOK
           filters:
             - SetPath=/menu-anon/{path}
           predicates:
             - Path=/v1/api-menu/menu-anon/{path}  #直接访问菜谱接口
-        - id: MENU-CENTER
-          uri: lb://MENU-CENTER
+        - id: SMARTCOOK
+          uri: lb://SMARTCOOK
           filters:
             - SetPath=/menu/{path}
           predicates:
             - Path=/v1/api-menu/menu/{path}   #需要权限验证
-        - id: MENU-CENTER
-          uri: lb://MENU-CENTER
+        - id: SMARTCOOK
+          uri: lb://SMARTCOOK
           filters:
             - SetPath=/menu-anon/cookbooks/{path}
           predicates:

@@ -4,6 +4,7 @@ import com.iotmars.feign.LogClient;
 import com.iotmars.feign.Oauth2Client;
 import com.iotmars.utils.CredentialType;
 import com.iotmars.utils.Log;
+import com.iotmars.utils.SystemClientInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,9 +40,9 @@ public class TokenController {
     public Map<String, Object> login(String username, String password) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(OAuth2Utils.GRANT_TYPE, "password");
-        parameters.put(OAuth2Utils.CLIENT_ID, com.cloud.model.oauth.SystemClientInfo.CLIENT_ID);
-        parameters.put("client_secret", com.cloud.model.oauth.SystemClientInfo.CLIENT_SECRET);
-        parameters.put(OAuth2Utils.SCOPE, com.cloud.model.oauth.SystemClientInfo.CLIENT_SCOPE);
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
 //		parameters.put("username", username);
         // 为了支持多类型登录，这里在username后拼装上登录类型
         parameters.put("username", username + "|" + CredentialType.USERNAME.name());
@@ -65,9 +66,9 @@ public class TokenController {
     public Map<String, Object> smsLogin(String phone, String key, String code) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(OAuth2Utils.GRANT_TYPE, "password");
-        parameters.put(OAuth2Utils.CLIENT_ID, com.cloud.model.oauth.SystemClientInfo.CLIENT_ID);
-        parameters.put("client_secret", com.cloud.model.oauth.SystemClientInfo.CLIENT_SECRET);
-        parameters.put(OAuth2Utils.SCOPE, com.cloud.model.oauth.SystemClientInfo.CLIENT_SCOPE);
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
         // 为了支持多类型登录，这里在username后拼装上登录类型，同时为了校验短信验证码，我们也拼上code等
         parameters.put("username", phone + "|" + CredentialType.PHONE.name() + "|" + key + "|" + code + "|"
                 + DigestUtils.md5Hex(key + code));
@@ -89,9 +90,9 @@ public class TokenController {
     public Map<String, Object> smsLogin(String openid, String tempCode) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(OAuth2Utils.GRANT_TYPE, "password");
-        parameters.put(OAuth2Utils.CLIENT_ID, com.cloud.model.oauth.SystemClientInfo.CLIENT_ID);
-        parameters.put("client_secret", com.cloud.model.oauth.SystemClientInfo.CLIENT_SECRET);
-        parameters.put(OAuth2Utils.SCOPE, com.cloud.model.oauth.SystemClientInfo.CLIENT_SCOPE);
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
         // 为了支持多类型登录，这里在username后拼装上登录类型，同时为了服务端校验，我们也拼上tempCode
         parameters.put("username", openid + "|" + CredentialType.WECHAT_OPENID.name() + "|" + tempCode);
         // 微信登录无需密码，但security底层有密码校验，我们这里将手机号作为密码，认证中心采用同样规则即可
@@ -136,9 +137,9 @@ public class TokenController {
     public Map<String, Object> refresh_token(String refresh_token) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(OAuth2Utils.GRANT_TYPE, "refresh_token");
-        parameters.put(OAuth2Utils.CLIENT_ID, com.cloud.model.oauth.SystemClientInfo.CLIENT_ID);
-        parameters.put("client_secret", com.cloud.model.oauth.SystemClientInfo.CLIENT_SECRET);
-        parameters.put(OAuth2Utils.SCOPE, com.cloud.model.oauth.SystemClientInfo.CLIENT_SCOPE);
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
         parameters.put("refresh_token", refresh_token);
 
         return oauth2Client.postAccessToken(parameters);

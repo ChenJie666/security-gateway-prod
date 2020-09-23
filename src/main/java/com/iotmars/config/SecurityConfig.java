@@ -15,7 +15,8 @@ public class SecurityConfig {
 
 
 	//security的鉴权排除的url列表
-	private static final String[] excludedAuthPages = {"/v1/api-menu/menu/**","/v1/api-menu/menu-anon/**"};
+	private static final String[] excludedAuthPages = {"/v1/api-menu/menu/**","/v1/api-menu/menu-anon/**",
+			"/swagger-ui.html","/actuator/health", "/actuator/env"};
 
 	@Bean
 	SecurityWebFilterChain webFluxSecurityFilterChain(ServerHttpSecurity http) throws Exception {

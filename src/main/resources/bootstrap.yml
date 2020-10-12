@@ -8,11 +8,11 @@ spring:
     active: dev
   cloud:
     gateway:
-#      default-filters:  #全局过滤器
-      #        - name: Hystrix
-      #          args:
-      #            name: fallbackcmd  #使用HystrixCommand打包剩余的过滤器，并命名为fallbackcmd
-      #            fallbackUri: forward:/fallback  #配置fallbackUri，降级逻辑被调用
+      default-filters:  #全局过滤器
+        - name: Hystrix
+          args:
+           name: fallbackcmd  #使用HystrixCommand打包剩余的过滤器，并命名为fallbackcmd
+           fallbackUri: forward:/fallback  #配置fallbackUri，降级逻辑被调用
       discovery:
         locator:
           enabled: true
@@ -70,7 +70,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为5000ms
+            timeoutInMilliseconds: 5000 # 设置hystrix的超时时间为5000ms
 
 management:
   endpoints:

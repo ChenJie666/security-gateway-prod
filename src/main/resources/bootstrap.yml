@@ -70,7 +70,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 90000 # 设置hystrix的超时时间为90000ms
+            timeoutInMilliseconds: 120000 # 设置hystrix的超时时间为120000ms
 
 management:
   endpoints:

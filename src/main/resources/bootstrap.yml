@@ -54,11 +54,17 @@ eureka:
 ribbon:
   #开启ribbon负载均衡
   eureka:
-      enabled: true
-  #建立连接所用的时间
+    enabled: true
+  # 对所有操作请求都进行重试,默认false
+  OkToRetryOnAllOperations: false
+  # ribbon请求连接的超时时间,默认值5000
   ConnectTimeout: 5000
-  #建立连接后服务器响应时间
+  # 负载均衡超时时间,默认值5000
   ReadTimeout: 5000
+  # 对当前实例的重试次数，默认0
+  MaxAutoRetries: 0
+  #对切换实例的重试次数，默认1
+  MaxAutoRetriesNextServer: 1
 
 feign:
   hystrix:
@@ -70,7 +76,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 120000 # 设置hystrix的超时时间为120000ms
+            timeoutInMilliseconds: 60000 # 设置hystrix的超时时间为60000ms
 
 management:
   endpoints:

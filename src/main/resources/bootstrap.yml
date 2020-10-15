@@ -8,11 +8,11 @@ spring:
     active: dev
   cloud:
     gateway:
-      default-filters:  #全局过滤器
-        - name: Hystrix
-          args:
-           name: fallbackcmd  #使用HystrixCommand打包剩余的过滤器，并命名为fallbackcmd
-           fallbackUri: forward:/fallback  #配置fallbackUri，降级逻辑被调用
+#      default-filters:  #全局过滤器
+      #        - name: Hystrix
+      #          args:
+      #           name: fallbackcmd  #使用HystrixCommand打包剩余的过滤器，并命名为fallbackcmd
+      #           fallbackUri: forward:/fallback  #配置fallbackUri，降级逻辑被调用
       discovery:
         locator:
           enabled: true
@@ -55,20 +55,14 @@ ribbon:
   #开启ribbon负载均衡
   eureka:
     enabled: true
-  # 对所有操作请求都进行重试,默认false
-  OkToRetryOnAllOperations: false
   # ribbon请求连接的超时时间,默认值5000
   ConnectTimeout: 5000
   # 负载均衡超时时间,默认值5000
   ReadTimeout: 5000
-  # 对当前实例的重试次数，默认0
-  MaxAutoRetries: 0
-  #对切换实例的重试次数，默认1
-  MaxAutoRetriesNextServer: 1
 
 feign:
   hystrix:
-    enabled: true # 开启Feign的熔断功能
+    enabled: false # 开启Feign的熔断功能
 
 hystrix:
   command:

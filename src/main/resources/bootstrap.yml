@@ -56,14 +56,21 @@ ribbon:
   eureka:
     enabled: true
   # ribbon请求连接的超时时间,默认值5000
-  ConnectTimeout: 5000
+  ConnectTimeout: 1000
   # 负载均衡超时时间,默认值5000
-  ReadTimeout: 5000
+  ReadTimeout: 1000
+  # 是否开启重试
+  OkToRetryOnAllOperations: true
+  # 重试期间，实例切换次数
+  MaxAutoRetriesNextServe: 2
+  # 当前实例重试次数
+  MaxAutoRetries: 1
+
 
 feign:
   hystrix:
     enabled: false # 开启Feign的熔断功能
-
+#  断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试
 hystrix:
   command:
     default:

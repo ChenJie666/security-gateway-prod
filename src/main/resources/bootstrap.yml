@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: TEST-gateway-server
+    name: gateway-server
   profiles:
     active: dev
   cloud:

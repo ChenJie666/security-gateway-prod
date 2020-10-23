@@ -38,16 +38,15 @@ spring:
             - SetPath=/menu-anon/cookbooks/{path}
           predicates:
             - Path=/v1/api-menu/menu-anon/cookbooks/{path}  # 直接访问菜谱接口
-
-        - id: TEST-UAA-CENTER
-          uri: lb://TEST-UAA-CENTER
+        - id: SECURITY-UAA
+          uri: lb://SECURITY-UAA
           predicates:
             - Path=/uaa/**
           filters:
             - PreserveHostHeader
         #           - RewritePath=/uaa(?<segment>/?.*), $\{segment}UAA-CENTER
-        - id: TEST-USER-CENTER
-          uri: lb://TEST-USER-CENTER
+        - id: SECURITY-USER
+          uri: lb://SECURITY-USER
           predicates:
             - Path=/uc/**
           filter:

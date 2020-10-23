@@ -1,6 +1,6 @@
 package com.iotmars.filter;
 
-import com.iotmars.utils.Result;
+import com.iotmars.utils.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -36,11 +36,11 @@ public class InternalURIAccessFilter implements GlobalFilter,Ordered {
 		String uri = path.contextPath().value();
 		log.info("request.getPath():" + path);
 
-		if (PatternMatchUtils.simpleMatch("*-anon/internal*", uri)) {
+		if (PatternMatchUtils.simpleMatch("/feign/**", uri)) {
 			ServerHttpResponse response = exchange.getResponse();
 
-			Result result = Result.error(HttpStatus.FORBIDDEN.value(), "访问拒绝");
-			byte[] bytes = result.toString().getBytes();
+			CommonResult<String> commonResult = CommonResult.error(HttpStatus.FORBIDDEN.value(), "访问拒绝");
+			byte[] bytes = commonResult.toString().getBytes();
 			DataBuffer buffer = response.bufferFactory().wrap(bytes);
 
 			response.setStatusCode(HttpStatus.FORBIDDEN);

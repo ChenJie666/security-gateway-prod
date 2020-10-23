@@ -1,7 +1,7 @@
 package com.iotmars.filter;
 
 import com.iotmars.feign.BackendClient;
-import com.iotmars.utils.Result;
+import com.iotmars.utils.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -47,7 +47,7 @@ public class BlackIPAccessFilter implements GlobalFilter,Ordered {
 		if(blackIPs.contains(ip)) {
 			ServerHttpResponse response = exchange.getResponse();
 
-			Result result = Result.error(HttpStatus.FORBIDDEN.value(), "鉴权失败");
+			CommonResult<String> result = CommonResult.error(HttpStatus.FORBIDDEN.value(), "鉴权失败");
 			byte[] bytes = result.toString().getBytes();
 			DataBuffer buffer = response.bufferFactory().wrap(bytes);
 

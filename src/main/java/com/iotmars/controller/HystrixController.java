@@ -1,6 +1,6 @@
 package com.iotmars.controller;
 
-import com.iotmars.utils.Result;
+import com.iotmars.utils.CommonResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HystrixController {
 
     @RequestMapping("/fallback")
-    public Result fallBack(){
-        return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"网关调用服务异常");
+    public CommonResult fallBack(){
+        return CommonResult.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"网关调用服务异常");
     }
 
 }

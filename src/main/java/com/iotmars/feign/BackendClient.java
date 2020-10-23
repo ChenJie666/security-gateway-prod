@@ -13,8 +13,7 @@ import java.util.Set;
 @FeignClient("manage-backend")
 public interface BackendClient {
 
-    @GetMapping("/backend-anon/internal/blackIPs")
+    @GetMapping("/feign/user/blackList")
     Set<String> findAllBlackIPs(@RequestParam("params") Map<String, Object> params);
 
 }
-

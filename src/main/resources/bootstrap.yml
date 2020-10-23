@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gateway-server
+    name: TEST-gateway-server
   profiles:
     active: dev
   cloud:
@@ -21,6 +21,9 @@ spring:
           uri: lb://SMARTCOOK
           filters:
             - SetPath=/menu-anon/{path}
+            - RemoveResponseHeader=Mars-Token
+            - RemoveResponseHeader=Authorization
+            - RemoveRequestParameter=access_token
           predicates:
             - Path=/v1/api-menu/menu-anon/{path}  #直接访问菜谱接口
         - id: SMARTCOOK
@@ -35,6 +38,24 @@ spring:
             - SetPath=/menu-anon/cookbooks/{path}
           predicates:
             - Path=/v1/api-menu/menu-anon/cookbooks/{path}  # 直接访问菜谱接口
+
+        - id: TEST-UAA-CENTER
+          uri: lb://TEST-UAA-CENTER
+          predicates:
+            - Path=/uaa/**
+          filters:
+            - PreserveHostHeader
+        #           - RewritePath=/uaa(?<segment>/?.*), $\{segment}UAA-CENTER
+        - id: TEST-USER-CENTER
+          uri: lb://TEST-USER-CENTER
+          predicates:
+            - Path=/uc/**
+          filter:
+            - PreserveHostHeader
+        - id: APPLICATION-CLOUD
+          uri: lb://APPLICATION-CLOUD
+          predicates:
+            - Path=/application/**
       globalcors: #跨域配置
         corsConfigurations:
           '[/**]':
@@ -90,4 +111,5 @@ management:
 
 cron:
   black-ip: 0 0/5 * * * ?
+  sync_expired_token: 0 0/5 * * * ?
 

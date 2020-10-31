@@ -10,7 +10,7 @@ import java.util.Map;
  * @Author: CJ
  * @Data: 2020/9/30 13:43
  */
-@FeignClient(name = "TEST-USER-CENTER")
+@FeignClient(name = "SECURITY-USER")
 public interface ExpiredTokenFeign {
 
     @GetMapping(path = "/feign/user/getExpiredToken")

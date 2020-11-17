@@ -55,6 +55,10 @@ spring:
           uri: lb://APPLICATION-CLOUD
           predicates:
             - Path=/application/**
+        - id: MCOOK-ONLINE-TIME
+          uri: lb://MCOOK-ONLINE-TIME
+          predicates:
+            - Path=/online/**
       globalcors: #跨域配置
         corsConfigurations:
           '[/**]':

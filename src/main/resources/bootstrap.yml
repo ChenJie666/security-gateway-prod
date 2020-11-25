@@ -59,6 +59,10 @@ spring:
           uri: lb://MCOOK-ONLINE-TIME
           predicates:
             - Path=/online/**
+        - id: MCOOK-SWALLOWS-PLATFORM
+          uri: lb://MCOOK-SWALLOWS-PLATFORM
+          predicates:
+            - Path=/iot/**
       globalcors: #跨域配置
         corsConfigurations:
           '[/**]':

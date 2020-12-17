@@ -21,6 +21,22 @@ job-build:
   after_script:
     - sudo rm -rf ./target
 
+job-deploy-test:
+  stage: deploy
+  only:
+    - test
+  script:
+    - cd ~
+    - scp ./${CI_PROJECT_NAME}.jar fayfox@ecs04.iotmars.com:/data/projects/java/
+    - ssh fayfox@ecs04.iotmars.com "sudo docker stop $CI_PROJECT_NAME || echo "容器不存在";
+      sudo docker rm $CI_PROJECT_NAME || echo "容器不存在";
+      sudo docker run -d --name $CI_PROJECT_NAME
+      -v /data/projects/java/${CI_PROJECT_NAME}.jar:/app.jar
+      --restart=always
+      --network host
+      -e TZ='Asia/Shanghai'
+      openjdk:13
+      java -jar -Xms512m -Xmx512m /app.jar --spring.profiles.active=test"
 
 job-deploy-prod:
   stage: deploy

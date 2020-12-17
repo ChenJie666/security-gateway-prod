@@ -35,7 +35,7 @@ job-deploy-test:
       --restart=always
       --network host
       -e TZ='Asia/Shanghai'
-      openjdk:13
+      openjdk:8
       java -jar -Xms512m -Xmx512m /app.jar --spring.profiles.active=test"
 
 job-deploy-prod:

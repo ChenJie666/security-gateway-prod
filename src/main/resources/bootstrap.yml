@@ -64,9 +64,9 @@ spring:
           predicates:
             - Path=/iot/**
         - id: MCOOK-BIG-DATA
-            uri: lb://MCOOK-BIG-DATA
-            predicates:
-            - Path=/bigdata/**
+          uri: lb://MCOOK-BIG-DATA
+          predicates:
+          - Path=/bigdata/**
       globalcors: #跨域配置
         corsConfigurations:
           '[/**]':
